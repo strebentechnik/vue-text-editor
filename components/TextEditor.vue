@@ -3,19 +3,25 @@ import { useEditor, EditorContent } from "@tiptap/vue-3";
 import StarterKit from "@tiptap/starter-kit";
 
 export default {
+  props: ["content"],
   components: {
     EditorContent,
   },
 
-  setup() {
+  setup(props) {
+    const { content } = props;
+    const initial = ref("<p>Start typing here..</p>");
     const editor = useEditor({
-      content: "<p>Start typing here..</p>",
+      content: initial.value,
       extensions: [StarterKit],
+      onUpdate({ editor }) {
+        initial.value = editor.getHTML();
+      },
     });
 
     onBeforeUnmount(() => editor.value.destroy());
 
-    return { editor };
+    return { editor, content };
   },
 };
 </script>
@@ -43,6 +49,35 @@ export default {
         </button>
 
         <button
+          @click="editor.chain().focus().toggleCode().run()"
+          class="bg-white border border-gray-200 p-2 rounded-md"
+          :class="editor?.isActive('code') && 'bg-gray-200'"
+        >
+          <img class="w-5 h-5" src="../assets/icons/code.svg" />
+        </button>
+
+        <button
+          @click="editor.chain().focus().toggleHeading({ level: 1 }).run()"
+          class="bg-white border border-gray-200 p-2 rounded-md"
+          :class="editor?.isActive('heading', { level: 1 }) && 'bg-gray-200'"
+        >
+          <p class="h-5 w-5">H1</p>
+        </button>
+        <button
+          @click="editor.chain().focus().toggleHeading({ level: 2 }).run()"
+          class="bg-white border border-gray-200 p-2 rounded-md"
+          :class="editor?.isActive('heading', { level: 2 }) && 'bg-gray-200'"
+        >
+          <p class="h-5 w-5">H2</p>
+        </button>
+        <button
+          @click="editor.chain().focus().toggleHeading({ level: 3 }).run()"
+          class="bg-white border border-gray-200 p-2 rounded-md"
+          :class="editor?.isActive('heading', { level: 3 }) && 'bg-gray-200'"
+        >
+          <p class="h-5 w-5">H3</p>
+        </button>
+        <button
           @click="editor.chain().focus().toggleBulletList().run()"
           class="bg-white border border-gray-200 p-2 rounded-md"
           :class="editor?.isActive('bulletList') && 'bg-gray-200'"
@@ -55,7 +90,7 @@ export default {
           class="bg-white border border-gray-200 p-2 rounded-md"
           :class="editor?.isActive('orderedList') && 'bg-gray-200'"
         >
-          <img class="w-5 h-5" src="../assets/icons/list.svg" />
+          <img class="w-5 h-5" src="../assets/icons/o-list.svg" />
         </button>
       </div>
       <div class="flex gap-2">

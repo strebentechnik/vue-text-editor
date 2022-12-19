@@ -3,7 +3,7 @@ export default {
   components: {},
 
   setup() {
-    const content = ref();
+    const content = ref("<p>Start typing here..</p>");
 
     const printContent = () => {
       console.log(content.value);
@@ -16,7 +16,7 @@ export default {
 
 <template>
   <div class="flex flex-col w-full items-center justify-center p-4">
-    <TextEditor />
+    <TextEditor :content="content" />
     <div class="flex flex-col items-end max-w-4xl w-full">
       <button
         @click="printContent"
