@@ -29,6 +29,7 @@ code {
   padding: 0.5rem;
   border-radius: 4px;
   font-family: "JetBrainsMono", monospace;
+  line-height: 3rem;
 }
 
 img {

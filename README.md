@@ -1,6 +1,12 @@
-# Nuxt 3 Minimal Starter
-
-Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+<p align="center">
+<h2 align="center">Rich Text Editor</h2>
+</p>
+<p align="center">
+Text Editor for Vue 3 with TailwindCSS
+</p>
+<p align="center">
+<img src="https://raw.githubusercontent.com/strebentechnik/TextEditor/main/assets/img/editor.webp" width=720 alt="texteditor"/>
+</p>
 
 ## Setup
 
@@ -13,8 +19,6 @@ yarn install
 # npm
 npm install
 
-# pnpm
-pnpm install --shamefully-hoist
 ```
 
 ## Development Server
@@ -38,5 +42,3 @@ Locally preview production build:
 ```bash
 npm run preview
 ```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.

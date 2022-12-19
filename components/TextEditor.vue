@@ -3,25 +3,23 @@ import { useEditor, EditorContent } from "@tiptap/vue-3";
 import StarterKit from "@tiptap/starter-kit";
 
 export default {
-  props: ["content"],
+  props: ["state"],
   components: {
     EditorContent,
   },
 
   setup(props) {
-    const { content } = props;
-    const initial = ref("<p>Start typing here..</p>");
     const editor = useEditor({
-      content: initial.value,
+      content: props.state.content,
       extensions: [StarterKit],
       onUpdate({ editor }) {
-        initial.value = editor.getHTML();
+        props.state.onChange(editor.getHTML());
       },
     });
 
     onBeforeUnmount(() => editor.value.destroy());
-
-    return { editor, content };
+    
+    return { editor, props };
   },
 };
 </script>
